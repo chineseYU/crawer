@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      * {margin: 0;padding: 0;}
+      ul {list-style-type: none;}
+      li {border-bottom: 1px solid black;margin-top: 10px;}
+      span {display: inline-block;width: 45%;}
+    </style>
+    <script src="http://fe.laipao8cdn.com/js/axios/0.16.2/axios.min.js" charset="utf-8"></script>
+    <script src="http://fe.laipao8cdn.com/js/vue/2.3.4/vue.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="container">
+      <ul>
+        <li v-for="item in res">
+          <span style="color: red;">{{item.title}}</span>：
+          <span>{{item.url}}</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#container',
+      data: {
+        res: []
+      },
+      mounted: function () {
+        var this_ = this;
+        axios.get('data.js')
+        .then(function (response) {
+          this_.res = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    })
+
+  </script>
+</html>
